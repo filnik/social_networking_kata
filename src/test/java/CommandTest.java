@@ -49,7 +49,6 @@ public class CommandTest {
     public void setUp() throws Exception {
         inputStream = new FakeInputStream();
         flow = new MemoryFlow(inputStream, outputStream);
-        flow.start();
 
         inputStream.post("Alice -> I love the weather today");
         inputStream.post("Bob -> Damn! We lost!");
@@ -71,6 +70,7 @@ public class CommandTest {
         assertEquals(inputStream.next(), "Bob -> Damn! We lost!");
         assertEquals(inputStream.next(), "Bob -> Good game though.");
         assertThat(((FakeInputStream) inputStream).strings, hasSize(0));
+        flow.start();
         verify(outputStream, never()).out("");
     }
 
@@ -86,6 +86,13 @@ public class CommandTest {
 
     @Test
     public void verifiesreadingCommandExecutesCorrectly() throws Exception {
+        inputStream.post("Alice");
+        flow.start();
+        verify(outputStream).out("I love the weather today (0 minutes ago)");
+        inputStream.post("Bob");
+        flow.start();
+        verify(outputStream).out("Good game though. (0 minutes ago)");
+        verify(outputStream).out("Damn! We lost! (0 minutes ago)");
     }
 
     @Test
