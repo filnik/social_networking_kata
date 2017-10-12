@@ -28,6 +28,10 @@ public class PostCommandTest extends CommandBaseTest {
 
     @Test
     public void verifiesPostingCommandExecutesCorrectly() throws Exception {
+        inputStream.post("Alice -> I love the weather today");
+        inputStream.post("Bob -> Damn! We lost!");
+        inputStream.post("Bob -> Good game though.");
+
         assertThat(((FakeInputStream) inputStream).strings, hasSize(3));
         assertEquals(inputStream.next(), "Alice -> I love the weather today");
         assertEquals(inputStream.next(), "Bob -> Damn! We lost!");

@@ -8,6 +8,7 @@ import service.Input;
 import service.MemoryFlow;
 import service.Output;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 import static org.hamcrest.Matchers.hasSize;
@@ -21,15 +22,23 @@ public class CommandBaseTest {
     protected Output outputStream;
     protected MemoryFlow flow;
     protected Input inputStream;
+    protected FakeClock clock;
 
     @Before
     public void setUp() throws Exception {
         inputStream = new FakeInputStream();
-        flow = new MemoryFlow(new Clock(), inputStream, outputStream);
+        clock = new FakeClock();
+        flow = new MemoryFlow(clock, inputStream, outputStream);
 
+        clock.setDiff(5);
         inputStream.post("Alice -> I love the weather today");
+        flow.start();
+        clock.setDiff(2);
         inputStream.post("Bob -> Damn! We lost!");
+        flow.start();
+        clock.setDiff(1);
         inputStream.post("Bob -> Good game though.");
+        flow.start();
     }
 
     protected class FakeInputStream implements Input {
@@ -50,6 +59,19 @@ public class CommandBaseTest {
             String result = strings.get(0);
             strings.remove(0);
             return result;
+        }
+    }
+
+    protected class FakeClock  extends Clock {
+        int diff = 0;
+
+        @Override
+        public LocalDateTime now() {
+            return LocalDateTime.now().plusMinutes(diff+1); // avoid rounding problems
+        }
+
+        public void setDiff(int newDiff){
+            diff = newDiff;
         }
     }
 }

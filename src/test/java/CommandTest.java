@@ -1,6 +1,13 @@
+import model.Clock;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.runners.MockitoJUnitRunner;
+import service.MemoryFlow;
+
+import java.time.LocalDateTime;
+
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.verify;
 
 @RunWith(MockitoJUnitRunner.class)
 public class CommandTest extends CommandBaseTest{
@@ -29,7 +36,20 @@ public class CommandTest extends CommandBaseTest{
 
     @Test
     public void verifiesFollowingCommandExecutesCorrectly() throws Exception {
-
+        inputStream.post("Charlie -> I'm in New York today! Anyone wants to have a coffee?");
+        verify(outputStream, never()).out("");
+        inputStream.post("Charlie follows Alice");
+        verify(outputStream, never()).out("");
+        inputStream.post("Charlie wall");
+        verify(outputStream).out("Charlie - I'm in New York today! Anyone wants to have a coffee? (2 seconds ago)\n" +
+                                         "Alice - I love the weather today (5 minutes ago)");
+        inputStream.post("Charlie follows Bob");
+        verify(outputStream, never()).out("");
+        inputStream.post("Charlie wall");
+        verify(outputStream).out("Charlie - I'm in New York today! Anyone wants to have a coffee? (15 seconds ago)\n" +
+                                        "Bob - Good game though. (1 minute ago)\n" +
+                                        "Bob - Damn! We lost! (2 minutes ago)\n" +
+                                        "Alice - I love the weather today (5 minutes ago)");
     }
 
     @Test

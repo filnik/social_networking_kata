@@ -23,20 +23,12 @@ public class ReadCommandTest extends CommandBaseTest{
 
     @Test
     public void verifiesreadingCommandExecutesCorrectly() throws Exception {
-        flow = new MemoryFlow(new TenMinutesLaterClock(), inputStream, outputStream);
         inputStream.post("Alice");
         flow.start();
-        verify(outputStream).out("I love the weather today (10 minutes ago)");
+        verify(outputStream).out("I love the weather today (5 minutes ago)");
         inputStream.post("Bob");
         flow.start();
-        verify(outputStream).out("Good game though. (10 minutes ago)");
-        verify(outputStream).out("Damn! We lost! (10 minutes ago)");
-    }
-
-    private class TenMinutesLaterClock extends Clock {
-        @Override
-        public LocalDateTime now() {
-            return LocalDateTime.now().plusMinutes(11); // avoid rounding problems
-        }
+        verify(outputStream).out("Good game though. (1 minutes ago)");
+        verify(outputStream).out("Damn! We lost! (2 minutes ago)");
     }
 }
