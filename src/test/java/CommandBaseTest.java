@@ -39,6 +39,7 @@ public class CommandBaseTest {
         clock.setDiff(1);
         inputStream.post("Bob -> Good game though.");
         flow.start();
+        clock.setDiff(0);
     }
 
     protected class FakeInputStream implements Input {
@@ -64,10 +65,15 @@ public class CommandBaseTest {
 
     protected class FakeClock  extends Clock {
         int diff = 0;
+        private LocalDateTime now = LocalDateTime.now();
+
+        public FakeClock() {
+            now = now.minusSeconds(now.getSecond());
+        }
 
         @Override
         public LocalDateTime now() {
-            return LocalDateTime.now().plusMinutes(diff+1); // avoid rounding problems
+            return now.plusMinutes(diff); // avoid rounding problems
         }
 
         public void setDiff(int newDiff){
