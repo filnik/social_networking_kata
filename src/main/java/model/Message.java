@@ -15,7 +15,7 @@ public class Message {
     @Override
     public String toString() {
         LocalDateTime now = LocalDateTime.now();
-        long minutes = timestamp.until(now, ChronoUnit.MINUTES);
+        long minutes = now.until(timestamp, ChronoUnit.MINUTES);
         return message + String.format(" (%s minutes ago)", minutes);
     }
 }
