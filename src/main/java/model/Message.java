@@ -7,9 +7,9 @@ public class Message {
     private final String message;
     private final LocalDateTime timestamp;
 
-    public Message(String message) {
+    public Message(String message, LocalDateTime timestamp) {
         this.message = message;
-        this.timestamp = LocalDateTime.now();
+        this.timestamp = timestamp;
     }
 
     @Override

@@ -1,16 +1,19 @@
 package service;
 
+import model.Clock;
 import model.Message;
 import model.User;
 
 import java.util.HashMap;
 
 public class MemoryFlow implements Flow {
+    private final Clock clock;
     private final Input inputStream;
     private final Output outputStream;
     private final HashMap<String, User> users = new HashMap<String, User>();
 
-    public MemoryFlow(Input inputStream, Output outputStream) {
+    public MemoryFlow(Clock clock, Input inputStream, Output outputStream) {
+        this.clock = clock;
         this.inputStream = inputStream;
         this.outputStream = outputStream;
     }
@@ -31,7 +34,7 @@ public class MemoryFlow implements Flow {
             if (existsUser(username)){
                 user = users.get(username.toLowerCase());
             } else {
-                user = new User();
+                user = new User(clock);
                 users.put(username.toLowerCase(), user);
             }
             user.addMessage(message);
