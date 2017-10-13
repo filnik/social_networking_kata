@@ -67,7 +67,7 @@ public class CommandBaseTest {
 
         @Override
         public LocalDateTime now() {
-            return now.plusMinutes(minutes).plusSeconds(seconds);
+            return now.minusMinutes(minutes).minusSeconds(seconds);
         }
 
         public void minutesDelay(int delay){

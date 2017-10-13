@@ -6,5 +6,4 @@ public class Main {
     public static void main(String[] args) {
         new MemoryFlow(new Clock(), new SystemInput(), System.out::println).start();
     }
-
 }

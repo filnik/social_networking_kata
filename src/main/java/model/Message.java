@@ -23,8 +23,8 @@ public class Message {
     @Override
     public String toString() {
         LocalDateTime now = clock.now();
-        long minutes = now.until(timestamp, ChronoUnit.MINUTES);
-        long seconds = now.until(timestamp, ChronoUnit.SECONDS);
+        long minutes = timestamp.until(now, ChronoUnit.MINUTES);
+        long seconds = timestamp.until(now, ChronoUnit.SECONDS);
         if (minutes > 0)
             return message + String.format(minutes == 1 ? MINUTE : MINUTES, minutes);
         else
