@@ -20,4 +20,8 @@ public class Message {
         long minutes = now.until(timestamp, ChronoUnit.MINUTES);
         return message + String.format(" (%s minutes ago)", minutes);
     }
+
+    public LocalDateTime getTimestamp() {
+        return timestamp;
+    }
 }

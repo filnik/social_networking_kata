@@ -18,7 +18,7 @@ public class PostCommand extends Command {
         final String message = split[1];
         User user;
         if (userFactory.exists(username)) {
-            user = userFactory.get(username.toLowerCase());
+            user = userFactory.get(username);
         } else {
             user = new User(username.toLowerCase(), clock);
             userFactory.put(user);

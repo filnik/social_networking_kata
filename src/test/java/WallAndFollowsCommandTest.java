@@ -10,7 +10,7 @@ import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 
 @RunWith(MockitoJUnitRunner.class)
-public class CommandTest extends CommandBaseTest{
+public class WallAndFollowsCommandTest extends CommandBaseTest{
     /*
     posting: <user name> -> <message>
     reading: <user name>
@@ -37,10 +37,13 @@ public class CommandTest extends CommandBaseTest{
     @Test
     public void verifiesFollowingCommandExecutesCorrectly() throws Exception {
         inputStream.post("Charlie -> I'm in New York today! Anyone wants to have a coffee?");
+        flow.start();
         verify(outputStream, never()).out("");
         inputStream.post("Charlie follows Alice");
+        flow.start();
         verify(outputStream, never()).out("");
         inputStream.post("Charlie wall");
+        flow.start();
         verify(outputStream).out("Charlie - I'm in New York today! Anyone wants to have a coffee? (2 seconds ago)\n" +
                                          "Alice - I love the weather today (5 minutes ago)");
         inputStream.post("Charlie follows Bob");
@@ -50,10 +53,5 @@ public class CommandTest extends CommandBaseTest{
                                         "Bob - Good game though. (1 minute ago)\n" +
                                         "Bob - Damn! We lost! (2 minutes ago)\n" +
                                         "Alice - I love the weather today (5 minutes ago)");
-    }
-
-    @Test
-    public void verifiesWallCommandExecutesCorrectly() throws Exception {
-
     }
 }

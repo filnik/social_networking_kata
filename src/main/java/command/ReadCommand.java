@@ -14,7 +14,7 @@ public class ReadCommand extends Command {
 
     @Override
     public void execute(String command) {
-        User user = userFactory.get(command.toLowerCase());
+        User user = userFactory.get(command);
         for (Message message : user.getMessages()){
             outputStream.out(message.toString());
         }

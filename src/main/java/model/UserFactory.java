@@ -14,7 +14,7 @@ public class UserFactory {
     }
 
     public User get(String user) {
-        return users.get(user);
+        return users.get(user.toLowerCase());
     }
 
     public void put(User user) {
