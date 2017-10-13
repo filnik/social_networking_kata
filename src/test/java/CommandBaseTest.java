@@ -3,12 +3,10 @@ import org.junit.Before;
 import org.mockito.Mock;
 import service.Flow;
 import service.Input;
-import service.MemoryFlow;
 import service.Output;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Iterator;
 
 public class CommandBaseTest {
     @Mock
@@ -21,7 +19,7 @@ public class CommandBaseTest {
     public void setUp() throws Exception {
         inputStream = new FakeInputStream();
         clock = new FakeClock();
-        flow = new MemoryFlow(clock, inputStream, outputStream);
+        flow = new Flow(clock, inputStream, outputStream);
 
         clock.minutesDelay(5);
         inputStream.post("Alice -> I love the weather today");
