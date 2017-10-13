@@ -4,8 +4,6 @@ import command.Command;
 import command.CommandFactory;
 import model.Clock;
 
-import java.util.Iterator;
-
 public class Flow{
     private final Input inputStream;
     private CommandFactory commandFactory;
@@ -16,8 +14,8 @@ public class Flow{
     }
 
     public void start() {
-        while(inputStream.hasNext()){
-            if (inputStream.hasNext())
+        while(inputStream.hasNextLine()){
+            if (inputStream.hasNextLine())
                 executeCommand(inputStream.nextLine());
         }
     }

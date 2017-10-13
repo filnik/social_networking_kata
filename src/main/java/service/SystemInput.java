@@ -10,7 +10,7 @@ public class SystemInput implements Input {
     }
 
     @Override
-    public boolean hasNext() {
+    public boolean hasNextLine() {
         return scanner.hasNextLine();
     }
 

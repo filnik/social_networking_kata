@@ -42,7 +42,7 @@ public class CommandBaseTest {
         }
 
         @Override
-        public boolean hasNext() {
+        public boolean hasNextLine() {
             return !strings.isEmpty();
         }
 

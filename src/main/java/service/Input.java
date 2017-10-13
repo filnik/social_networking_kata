@@ -1,6 +1,6 @@
 package service;
 
 public interface Input {
-    boolean hasNext();
+    boolean hasNextLine();
     String nextLine();
 }
