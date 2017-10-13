@@ -21,7 +21,6 @@ public class Flow{
     }
 
     private void executeCommand(String next) {
-        System.out.println(next);
         Command command = commandFactory.getCommand(next);
         command.execute(next);
     }
