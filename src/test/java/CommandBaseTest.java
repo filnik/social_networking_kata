@@ -1,23 +1,20 @@
 import model.Clock;
 import org.junit.Before;
 import org.mockito.Mock;
+import service.Flow;
 import service.Input;
 import service.MemoryFlow;
 import service.Output;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-
-import static org.hamcrest.Matchers.hasSize;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertThat;
-import static org.mockito.Mockito.verify;
+import java.util.Iterator;
 
 public class CommandBaseTest {
     @Mock
     protected Output outputStream;
-    protected MemoryFlow flow;
-    protected Input inputStream;
+    protected Flow flow;
+    protected FakeInputStream inputStream;
     protected FakeClock clock;
 
     @Before
@@ -52,7 +49,7 @@ public class CommandBaseTest {
         }
 
         @Override
-        public String next() {
+        public String nextLine() {
             String result = strings.get(0);
             strings.remove(0);
             return result;

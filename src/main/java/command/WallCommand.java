@@ -20,7 +20,10 @@ public class WallCommand extends Command {
     public void execute(String command) {
         User user = userFactory.get(command.replace(" wall", ""));
         List<Message> messages = getAllMessages(user);
+        printMessages(messages);
+    }
 
+    private void printMessages(List<Message> messages) {
         for (Message message : messages){
             outputStream.out(message.toWallString());
         }

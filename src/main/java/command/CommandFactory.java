@@ -12,6 +12,10 @@ public class CommandFactory {
 
     public CommandFactory(Clock clock, Output outputStream){
         UserFactory userFactory = new UserFactory();
+        initCommands(clock, outputStream, userFactory);
+    }
+
+    private void initCommands(Clock clock, Output outputStream, UserFactory userFactory) {
         commands.add(new PostCommand(outputStream, userFactory, clock));
         commands.add(new ReadCommand(outputStream, userFactory, clock));
         commands.add(new FollowCommand(outputStream, userFactory, clock));

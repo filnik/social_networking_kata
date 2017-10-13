@@ -15,6 +15,10 @@ public class ReadCommand extends Command {
     @Override
     public void execute(String command) {
         User user = userFactory.get(command);
+        printMessages(user);
+    }
+
+    private void printMessages(User user) {
         for (Message message : user.getMessages()){
             outputStream.out(message.toString());
         }

@@ -2,9 +2,11 @@ package service;
 
 import command.Command;
 import command.CommandFactory;
-import model.*;
+import model.Clock;
 
-public class MemoryFlow implements Flow {
+import java.util.Iterator;
+
+public class MemoryFlow implements Flow{
     private final Input inputStream;
     private CommandFactory commandFactory;
 
@@ -16,11 +18,12 @@ public class MemoryFlow implements Flow {
     public void start() {
         while(inputStream.hasNext()){
             if (inputStream.hasNext())
-                executeCommand(inputStream.next());
+                executeCommand(inputStream.nextLine());
         }
     }
 
     private void executeCommand(String next) {
+        System.out.println(next);
         Command command = commandFactory.getCommand(next);
         command.execute(next);
     }

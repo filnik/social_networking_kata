@@ -23,6 +23,7 @@ public class FollowCommand extends Command {
 
     @Override
     public boolean checkCondition(String command) {
-        return simpleCheck(command, " follows ");
+        String[] split = command.split(" follows ");
+        return userFactory.exists(split[0]);
     }
 }

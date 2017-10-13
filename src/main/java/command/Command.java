@@ -16,10 +16,5 @@ public abstract class Command {
     }
 
     public abstract void execute(String command);
-    abstract boolean checkCondition(String command);
-
-    protected boolean simpleCheck(String command, String splitter) {
-        String[] split = command.split(splitter);
-        return userFactory.exists(split[0]);
-    }
+    public abstract boolean checkCondition(String command);
 }

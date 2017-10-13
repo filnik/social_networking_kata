@@ -1,7 +1,6 @@
 package service;
 
-import java.util.Iterator;
-
-public interface Input extends Iterator<String> {
-    void post(String input);
+public interface Input {
+    boolean hasNext();
+    String nextLine();
 }

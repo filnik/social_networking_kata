@@ -1,10 +1,6 @@
-import model.Clock;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.runners.MockitoJUnitRunner;
-import service.MemoryFlow;
-
-import java.time.LocalDateTime;
 
 import static org.mockito.Mockito.verify;
 
