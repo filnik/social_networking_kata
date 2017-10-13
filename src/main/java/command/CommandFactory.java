@@ -1,7 +1,7 @@
 package command;
 
 import model.Clock;
-import model.UserFactory;
+import model.UserRepository;
 import service.Output;
 
 import java.util.ArrayList;
@@ -11,15 +11,15 @@ public class CommandFactory {
     private final ArrayList<Command> commands = new ArrayList<>();
 
     public CommandFactory(Clock clock, Output outputStream){
-        UserFactory userFactory = new UserFactory();
-        initCommands(clock, outputStream, userFactory);
+        UserRepository userRepository = new UserRepository();
+        initCommands(clock, outputStream, userRepository);
     }
 
-    private void initCommands(Clock clock, Output outputStream, UserFactory userFactory) {
-        commands.add(new PostCommand(outputStream, userFactory, clock));
-        commands.add(new ReadCommand(outputStream, userFactory, clock));
-        commands.add(new FollowCommand(outputStream, userFactory, clock));
-        commands.add(new WallCommand(outputStream, userFactory, clock));
+    private void initCommands(Clock clock, Output outputStream, UserRepository userRepository) {
+        commands.add(new PostCommand(outputStream, userRepository, clock));
+        commands.add(new ReadCommand(outputStream, userRepository, clock));
+        commands.add(new FollowCommand(outputStream, userRepository, clock));
+        commands.add(new WallCommand(outputStream, userRepository, clock));
     }
 
     public Command getCommand(String commandGiven) {

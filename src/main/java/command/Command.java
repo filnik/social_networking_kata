@@ -1,17 +1,17 @@
 package command;
 
 import model.Clock;
-import model.UserFactory;
+import model.UserRepository;
 import service.Output;
 
 public abstract class Command {
     protected final Output outputStream;
-    protected final UserFactory userFactory;
+    protected final UserRepository userRepository;
     protected final Clock clock;
 
-    public Command(Output outputStream, UserFactory userFactory, Clock clock) {
+    public Command(Output outputStream, UserRepository userRepository, Clock clock) {
         this.outputStream = outputStream;
-        this.userFactory = userFactory;
+        this.userRepository = userRepository;
         this.clock = clock;
     }
 

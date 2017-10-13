@@ -3,7 +3,7 @@ package command;
 import model.Clock;
 import model.Message;
 import model.User;
-import model.UserFactory;
+import model.UserRepository;
 import service.Output;
 
 import java.util.Collections;
@@ -12,13 +12,13 @@ import java.util.List;
 
 public class WallCommand extends Command {
 
-    public WallCommand(Output outputStream, UserFactory userFactory, Clock clock) {
-        super(outputStream, userFactory, clock);
+    public WallCommand(Output outputStream, UserRepository userRepository, Clock clock) {
+        super(outputStream, userRepository, clock);
     }
 
     @Override
     public void execute(String command) {
-        User user = userFactory.get(command.replace(" wall", ""));
+        User user = userRepository.load(command.replace(" wall", ""));
         List<Message> messages = getAllMessages(user);
         printMessages(messages);
     }
@@ -41,6 +41,6 @@ public class WallCommand extends Command {
     @Override
     public boolean checkCondition(String command) {
         boolean result = command.endsWith("wall");
-        return result && userFactory.exists(command.replace(" wall", ""));
+        return result && userRepository.exists(command.replace(" wall", ""));
     }
 }

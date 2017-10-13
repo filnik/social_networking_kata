@@ -2,21 +2,21 @@ package command;
 
 import model.Clock;
 import model.User;
-import model.UserFactory;
+import model.UserRepository;
 import service.Output;
 
 public class FollowCommand extends Command {
 
-    public FollowCommand(Output outputStream, UserFactory userFactory, Clock clock) {
-        super(outputStream, userFactory, clock);
+    public FollowCommand(Output outputStream, UserRepository userRepository, Clock clock) {
+        super(outputStream, userRepository, clock);
     }
 
     @Override
     public void execute(String command) {
         String[] users = command.split(" follows ");
-        if (userFactory.exists(users)){
-            User follower = userFactory.get(users[0]);
-            User followee = userFactory.get(users[1]);
+        if (userRepository.exists(users)){
+            User follower = userRepository.load(users[0]);
+            User followee = userRepository.load(users[1]);
             follower.follows(followee);
         }
     }
@@ -24,6 +24,6 @@ public class FollowCommand extends Command {
     @Override
     public boolean checkCondition(String command) {
         String[] split = command.split(" follows ");
-        return userFactory.exists(split[0]);
+        return userRepository.exists(split[0]);
     }
 }

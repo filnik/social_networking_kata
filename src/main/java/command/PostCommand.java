@@ -2,13 +2,13 @@ package command;
 
 import model.Clock;
 import model.User;
-import model.UserFactory;
+import model.UserRepository;
 import service.Output;
 
 public class PostCommand extends Command {
 
-    public PostCommand(Output outputStream, UserFactory userFactory, Clock clock) {
-        super(outputStream, userFactory, clock);
+    public PostCommand(Output outputStream, UserRepository userRepository, Clock clock) {
+        super(outputStream, userRepository, clock);
     }
 
     @Override
@@ -17,11 +17,11 @@ public class PostCommand extends Command {
         final String username = split[0];
         final String message = split[1];
         User user;
-        if (userFactory.exists(username)) {
-            user = userFactory.get(username);
+        if (userRepository.exists(username)) {
+            user = userRepository.load(username);
         } else {
             user = new User(username, clock);
-            userFactory.put(user);
+            userRepository.save(user);
         }
         user.addMessage(message);
     }

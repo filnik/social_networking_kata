@@ -3,18 +3,18 @@ package command;
 import model.Clock;
 import model.Message;
 import model.User;
-import model.UserFactory;
+import model.UserRepository;
 import service.Output;
 
 public class ReadCommand extends Command {
 
-    public ReadCommand(Output outputStream, UserFactory userFactory, Clock clock) {
-        super(outputStream, userFactory, clock);
+    public ReadCommand(Output outputStream, UserRepository userRepository, Clock clock) {
+        super(outputStream, userRepository, clock);
     }
 
     @Override
     public void execute(String command) {
-        User user = userFactory.get(command);
+        User user = userRepository.load(command);
         printMessages(user);
     }
 
@@ -26,6 +26,6 @@ public class ReadCommand extends Command {
 
     @Override
     public boolean checkCondition(String command) {
-        return userFactory.exists(command);
+        return userRepository.exists(command);
     }
 }

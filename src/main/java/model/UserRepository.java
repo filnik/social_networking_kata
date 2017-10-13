@@ -2,7 +2,7 @@ package model;
 
 import java.util.HashMap;
 
-public class UserFactory {
+public class UserRepository {
     private final HashMap<String, User> users = new HashMap<String, User>();
 
     public boolean exists(String... usersToParse) {
@@ -13,11 +13,11 @@ public class UserFactory {
         return false;
     }
 
-    public User get(String user) {
+    public User load(String user) {
         return users.get(user.toLowerCase());
     }
 
-    public void put(User user) {
+    public void save(User user) {
         users.put(user.getUsername().toLowerCase(), user);
     }
 }

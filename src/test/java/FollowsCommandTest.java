@@ -34,5 +34,6 @@ public class FollowsCommandTest extends CommandBaseTest{
         inputStream.post("Charlie follows Alice");
         flow.start();
         verify(outputStream, never()).out("");
+
     }
 }
