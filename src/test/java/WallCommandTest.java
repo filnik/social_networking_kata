@@ -6,7 +6,7 @@ import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 
 @RunWith(MockitoJUnitRunner.class)
-public class WallAndFollowsCommandTest extends CommandBaseTest{
+public class WallCommandTest extends CommandBaseTest{
     /*
     posting: <user name> -> <message>
     reading: <user name>
@@ -36,10 +36,7 @@ public class WallAndFollowsCommandTest extends CommandBaseTest{
         inputStream.post("Charlie -> I'm in New York today! Anyone wants to have a coffee?");
         flow.start();
         clock.secondsDelay(0);
-        verify(outputStream, never()).out("");
         inputStream.post("Charlie follows Alice");
-        flow.start();
-        verify(outputStream, never()).out("");
         inputStream.post("Charlie wall");
         flow.start();
         verify(outputStream).out("Charlie - I'm in New York today! Anyone wants to have a coffee? (2 seconds ago)");
@@ -52,7 +49,6 @@ public class WallAndFollowsCommandTest extends CommandBaseTest{
         inputStream.post("Charlie -> I'm in New York today! Anyone wants to have a coffee?");
         flow.start();
         clock.secondsDelay(0);
-        verify(outputStream, never()).out("");
         inputStream.post("Charlie follows Alice");
         inputStream.post("Charlie follows Bob");
         flow.start();
