@@ -4,8 +4,8 @@ This is my implementation of the Social networking kata: https://github.com/sand
 
 ## Run
 
-This is a maven project.
+This is a gradle project.
 
-Use `mvn compile` to compile the project.
+Use `./gradlew build` to compile the project.
 
-Use `mvn clean test` to run the tests.
+Use `./gradlew clean test` to run the tests.
