@@ -1,10 +1,6 @@
-import model.Clock;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.runners.MockitoJUnitRunner;
-import service.MemoryFlow;
-
-import java.time.LocalDateTime;
 
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
@@ -36,22 +32,36 @@ public class WallAndFollowsCommandTest extends CommandBaseTest{
 
     @Test
     public void verifiesFollowingCommandExecutesCorrectly() throws Exception {
+        clock.secondsDelay(2);
         inputStream.post("Charlie -> I'm in New York today! Anyone wants to have a coffee?");
         flow.start();
+        clock.secondsDelay(0);
         verify(outputStream, never()).out("");
         inputStream.post("Charlie follows Alice");
         flow.start();
         verify(outputStream, never()).out("");
         inputStream.post("Charlie wall");
         flow.start();
-        verify(outputStream).out("Charlie - I'm in New York today! Anyone wants to have a coffee? (2 seconds ago)\n" +
-                                         "Alice - I love the weather today (5 minutes ago)");
+        verify(outputStream).out("Charlie - I'm in New York today! Anyone wants to have a coffee? (2 seconds ago)");
+        verify(outputStream).out("Alice - I love the weather today (5 minutes ago)");
+    }
+
+    @Test
+    public void verifiesDoubleFollowingCommandExecutesCorrectly() throws Exception {
+        clock.secondsDelay(15);
+        inputStream.post("Charlie -> I'm in New York today! Anyone wants to have a coffee?");
+        flow.start();
+        clock.secondsDelay(0);
+        verify(outputStream, never()).out("");
+        inputStream.post("Charlie follows Alice");
         inputStream.post("Charlie follows Bob");
+        flow.start();
         verify(outputStream, never()).out("");
         inputStream.post("Charlie wall");
-        verify(outputStream).out("Charlie - I'm in New York today! Anyone wants to have a coffee? (15 seconds ago)\n" +
-                                        "Bob - Good game though. (1 minute ago)\n" +
-                                        "Bob - Damn! We lost! (2 minutes ago)\n" +
-                                        "Alice - I love the weather today (5 minutes ago)");
+        flow.start();
+        verify(outputStream).out("Charlie - I'm in New York today! Anyone wants to have a coffee? (15 seconds ago)");
+        verify(outputStream).out("Bob - Good game though. (1 minute ago)");
+        verify(outputStream).out("Bob - Damn! We lost! (2 minutes ago)");
+        verify(outputStream).out("Alice - I love the weather today (5 minutes ago)");
     }
 }

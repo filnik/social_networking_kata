@@ -20,7 +20,7 @@ public class PostCommand extends Command {
         if (userFactory.exists(username)) {
             user = userFactory.get(username);
         } else {
-            user = new User(username.toLowerCase(), clock);
+            user = new User(username, clock);
             userFactory.put(user);
         }
         user.addMessage(message);

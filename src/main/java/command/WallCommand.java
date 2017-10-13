@@ -22,7 +22,7 @@ public class WallCommand extends Command {
         List<Message> messages = getAllMessages(user);
 
         for (Message message : messages){
-            outputStream.out(message.toString());
+            outputStream.out(message.toWallString());
         }
     }
 

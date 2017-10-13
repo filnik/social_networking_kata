@@ -15,7 +15,7 @@ public class User {
     }
 
     public void addMessage(String message) {
-        messages.add(0, new Message(message, clock));
+        messages.add(0, new Message(this, message, clock));
     }
 
     public List<Message> getMessages() {

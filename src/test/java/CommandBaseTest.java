@@ -1,9 +1,6 @@
 import model.Clock;
 import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.runners.MockitoJUnitRunner;
 import service.Input;
 import service.MemoryFlow;
 import service.Output;
@@ -14,7 +11,6 @@ import java.util.ArrayList;
 import static org.hamcrest.Matchers.hasSize;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
-import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 
 public class CommandBaseTest {
@@ -30,16 +26,16 @@ public class CommandBaseTest {
         clock = new FakeClock();
         flow = new MemoryFlow(clock, inputStream, outputStream);
 
-        clock.setDiff(5);
+        clock.minutesDelay(5);
         inputStream.post("Alice -> I love the weather today");
         flow.start();
-        clock.setDiff(2);
+        clock.minutesDelay(2);
         inputStream.post("Bob -> Damn! We lost!");
         flow.start();
-        clock.setDiff(1);
+        clock.minutesDelay(1);
         inputStream.post("Bob -> Good game though.");
         flow.start();
-        clock.setDiff(0);
+        clock.minutesDelay(0);
     }
 
     protected class FakeInputStream implements Input {
@@ -64,7 +60,8 @@ public class CommandBaseTest {
     }
 
     protected class FakeClock  extends Clock {
-        int diff = 0;
+        private int minutes = 0;
+        private int seconds = 0;
         private LocalDateTime now = LocalDateTime.now();
 
         public FakeClock() {
@@ -73,11 +70,15 @@ public class CommandBaseTest {
 
         @Override
         public LocalDateTime now() {
-            return now.plusMinutes(diff); // avoid rounding problems
+            return now.plusMinutes(minutes).plusSeconds(seconds);
         }
 
-        public void setDiff(int newDiff){
-            diff = newDiff;
+        public void minutesDelay(int delay){
+            minutes = delay;
+        }
+
+        public void secondsDelay(int delay){
+            seconds = delay;
         }
     }
 }

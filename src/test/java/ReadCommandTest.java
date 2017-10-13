@@ -28,7 +28,7 @@ public class ReadCommandTest extends CommandBaseTest{
         verify(outputStream).out("I love the weather today (5 minutes ago)");
         inputStream.post("Bob");
         flow.start();
-        verify(outputStream).out("Good game though. (1 minutes ago)");
+        verify(outputStream).out("Good game though. (1 minute ago)");
         verify(outputStream).out("Damn! We lost! (2 minutes ago)");
     }
 }
