@@ -8,7 +8,7 @@ import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 
 @RunWith(MockitoJUnitRunner.class)
-public class FollowsCommandTest extends CommandBaseTest{
+public class FollowCommandTest extends CommandBaseTest{
     /*
     ----
 
