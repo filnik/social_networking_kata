@@ -8,9 +8,9 @@ public class Flow{
     private final Input inputStream;
     private CommandFactory commandFactory;
 
-    public Flow(Clock clock, Input inputStream, Output outputStream) {
+    public Flow(Input inputStream, CommandFactory commandFactory) {
         this.inputStream = inputStream;
-        this.commandFactory = new CommandFactory(clock, outputStream);
+        this.commandFactory = commandFactory;
     }
 
     public void start() {

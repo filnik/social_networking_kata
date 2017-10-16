@@ -26,11 +26,11 @@ public class PostCommandTest extends CommandBaseTest {
         inputStream.post("Bob -> Damn! We lost!");
         inputStream.post("Bob -> Good game though.");
 
-        assertThat(((FakeInputStream) inputStream).strings, hasSize(3));
+        assertThat(inputStream.strings, hasSize(3));
         assertEquals(inputStream.nextLine(), "Alice -> I love the weather today");
         assertEquals(inputStream.nextLine(), "Bob -> Damn! We lost!");
         assertEquals(inputStream.nextLine(), "Bob -> Good game though.");
-        assertThat(((FakeInputStream) inputStream).strings, hasSize(0));
+        assertThat(inputStream.strings, hasSize(0));
         flow.start();
         verify(outputStream, never()).out("");
     }
