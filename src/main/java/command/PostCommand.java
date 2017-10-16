@@ -7,8 +7,8 @@ import service.Output;
 
 public class PostCommand extends Command {
 
-    public PostCommand(Output outputStream, UserRepository userRepository, Clock clock) {
-        super(outputStream, userRepository, clock);
+    public PostCommand(Output output, UserRepository userRepository, Clock clock) {
+        super(output, userRepository, clock);
     }
 
     @Override

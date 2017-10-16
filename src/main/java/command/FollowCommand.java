@@ -7,8 +7,8 @@ import service.Output;
 
 public class FollowCommand extends Command {
 
-    public FollowCommand(Output outputStream, UserRepository userRepository, Clock clock) {
-        super(outputStream, userRepository, clock);
+    public FollowCommand(Output output, UserRepository userRepository, Clock clock) {
+        super(output, userRepository, clock);
     }
 
     @Override

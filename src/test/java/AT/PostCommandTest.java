@@ -22,17 +22,17 @@ public class PostCommandTest extends CommandBaseTest {
 
     @Test
     public void verifiesPostingCommandExecutesCorrectly() throws Exception {
-        inputStream.post("Alice -> I love the weather today");
-        inputStream.post("Bob -> Damn! We lost!");
-        inputStream.post("Bob -> Good game though.");
+        input.post("Alice -> I love the weather today");
+        input.post("Bob -> Damn! We lost!");
+        input.post("Bob -> Good game though.");
 
-        assertThat(inputStream.strings, hasSize(3));
-        assertEquals(inputStream.nextLine(), "Alice -> I love the weather today");
-        assertEquals(inputStream.nextLine(), "Bob -> Damn! We lost!");
-        assertEquals(inputStream.nextLine(), "Bob -> Good game though.");
-        assertThat(inputStream.strings, hasSize(0));
+        assertThat(input.strings, hasSize(3));
+        assertEquals(input.nextLine(), "Alice -> I love the weather today");
+        assertEquals(input.nextLine(), "Bob -> Damn! We lost!");
+        assertEquals(input.nextLine(), "Bob -> Good game though.");
+        assertThat(input.strings, hasSize(0));
         flow.start();
-        verify(outputStream, never()).out("");
+        verify(output, never()).out("");
     }
 
 }

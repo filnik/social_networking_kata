@@ -12,25 +12,25 @@ import java.time.LocalDateTime;
 
 public class CommandBaseTest {
     @Mock
-    protected Output outputStream;
+    protected Output output;
     protected Flow flow;
-    protected FakeInput inputStream;
+    protected FakeInput input;
     protected FakeClock clock;
 
     @Before
     public void setUp() throws Exception {
-        inputStream = new FakeInput();
+        input = new FakeInput();
         clock = new FakeClock();
-        flow = new Flow(inputStream, new CommandFactory(clock, outputStream));
+        flow = new Flow(input, new CommandFactory(clock, output));
 
         clock.minutesDelay(5);
-        inputStream.post("Alice -> I love the weather today");
+        input.post("Alice -> I love the weather today");
         flow.start();
         clock.minutesDelay(2);
-        inputStream.post("Bob -> Damn! We lost!");
+        input.post("Bob -> Damn! We lost!");
         flow.start();
         clock.minutesDelay(1);
-        inputStream.post("Bob -> Good game though.");
+        input.post("Bob -> Good game though.");
         flow.start();
         clock.minutesDelay(0);
     }

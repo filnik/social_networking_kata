@@ -12,8 +12,8 @@ import java.util.List;
 
 public class WallCommand extends Command {
 
-    public WallCommand(Output outputStream, UserRepository userRepository, Clock clock) {
-        super(outputStream, userRepository, clock);
+    public WallCommand(Output output, UserRepository userRepository, Clock clock) {
+        super(output, userRepository, clock);
     }
 
     @Override
@@ -25,7 +25,7 @@ public class WallCommand extends Command {
 
     private void printMessages(List<Message> messages) {
         for (Message message : messages){
-            outputStream.out(message.toWallString());
+            output.out(message.toWallString());
         }
     }
 

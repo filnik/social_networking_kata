@@ -21,12 +21,12 @@ public class ReadCommandTest extends CommandBaseTest{
 
     @Test
     public void verifiesreadingCommandExecutesCorrectly() throws Exception {
-        inputStream.post("Alice");
+        input.post("Alice");
         flow.start();
-        verify(outputStream).out("I love the weather today (5 minutes ago)");
-        inputStream.post("Bob");
+        verify(output).out("I love the weather today (5 minutes ago)");
+        input.post("Bob");
         flow.start();
-        verify(outputStream).out("Good game though. (1 minute ago)");
-        verify(outputStream).out("Damn! We lost! (2 minutes ago)");
+        verify(output).out("Good game though. (1 minute ago)");
+        verify(output).out("Damn! We lost! (2 minutes ago)");
     }
 }

@@ -5,18 +5,18 @@ import command.CommandFactory;
 import model.Clock;
 
 public class Flow{
-    private final Input inputStream;
+    private final Input input;
     private CommandFactory commandFactory;
 
-    public Flow(Input inputStream, CommandFactory commandFactory) {
-        this.inputStream = inputStream;
+    public Flow(Input input, CommandFactory commandFactory) {
+        this.input = input;
         this.commandFactory = commandFactory;
     }
 
     public void start() {
-        while(inputStream.hasNextLine()){
-            if (inputStream.hasNextLine())
-                executeCommand(inputStream.nextLine());
+        while(input.hasNextLine()){
+            if (input.hasNextLine())
+                executeCommand(input.nextLine());
         }
     }
 

@@ -8,8 +8,8 @@ import service.Output;
 
 public class ReadCommand extends Command {
 
-    public ReadCommand(Output outputStream, UserRepository userRepository, Clock clock) {
-        super(outputStream, userRepository, clock);
+    public ReadCommand(Output output, UserRepository userRepository, Clock clock) {
+        super(output, userRepository, clock);
     }
 
     @Override
@@ -20,7 +20,7 @@ public class ReadCommand extends Command {
 
     private void printMessages(User user) {
         for (Message message : user.getMessages()){
-            outputStream.out(message.toString());
+            output.out(message.toString());
         }
     }
 

@@ -35,31 +35,31 @@ public class WallCommandTest extends CommandBaseTest{
     @Test
     public void verifiesFollowingCommandExecutesCorrectly() throws Exception {
         clock.secondsDelay(2);
-        inputStream.post("Charlie -> I'm in New York today! Anyone wants to have a coffee?");
+        input.post("Charlie -> I'm in New York today! Anyone wants to have a coffee?");
         flow.start();
         clock.secondsDelay(0);
-        inputStream.post("Charlie follows Alice");
-        inputStream.post("Charlie wall");
+        input.post("Charlie follows Alice");
+        input.post("Charlie wall");
         flow.start();
-        verify(outputStream).out("Charlie - I'm in New York today! Anyone wants to have a coffee? (2 seconds ago)");
-        verify(outputStream).out("Alice - I love the weather today (5 minutes ago)");
+        verify(output).out("Charlie - I'm in New York today! Anyone wants to have a coffee? (2 seconds ago)");
+        verify(output).out("Alice - I love the weather today (5 minutes ago)");
     }
 
     @Test
     public void verifiesDoubleFollowingCommandExecutesCorrectly() throws Exception {
         clock.secondsDelay(15);
-        inputStream.post("Charlie -> I'm in New York today! Anyone wants to have a coffee?");
+        input.post("Charlie -> I'm in New York today! Anyone wants to have a coffee?");
         flow.start();
         clock.secondsDelay(0);
-        inputStream.post("Charlie follows Alice");
-        inputStream.post("Charlie follows Bob");
+        input.post("Charlie follows Alice");
+        input.post("Charlie follows Bob");
         flow.start();
-        verify(outputStream, never()).out("");
-        inputStream.post("Charlie wall");
+        verify(output, never()).out("");
+        input.post("Charlie wall");
         flow.start();
-        verify(outputStream).out("Charlie - I'm in New York today! Anyone wants to have a coffee? (15 seconds ago)");
-        verify(outputStream).out("Bob - Good game though. (1 minute ago)");
-        verify(outputStream).out("Bob - Damn! We lost! (2 minutes ago)");
-        verify(outputStream).out("Alice - I love the weather today (5 minutes ago)");
+        verify(output).out("Charlie - I'm in New York today! Anyone wants to have a coffee? (15 seconds ago)");
+        verify(output).out("Bob - Good game though. (1 minute ago)");
+        verify(output).out("Bob - Damn! We lost! (2 minutes ago)");
+        verify(output).out("Alice - I love the weather today (5 minutes ago)");
     }
 }

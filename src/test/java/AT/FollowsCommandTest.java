@@ -29,12 +29,12 @@ public class FollowsCommandTest extends CommandBaseTest{
 
     @Test
     public void verifiesFollowingCommandExecutesCorrectly() throws Exception {
-        inputStream.post("Charlie -> I'm in New York today! Anyone wants to have a coffee?");
+        input.post("Charlie -> I'm in New York today! Anyone wants to have a coffee?");
         flow.start();
         clock.secondsDelay(0);
-        verify(outputStream, never()).out("");
-        inputStream.post("Charlie follows Alice");
+        verify(output, never()).out("");
+        input.post("Charlie follows Alice");
         flow.start();
-        verify(outputStream, never()).out("");
+        verify(output, never()).out("");
     }
 }
