@@ -28,7 +28,7 @@ public class Message {
         if (minutes > 0)
             return message + String.format(minutes == 1 ? MINUTE : MINUTES, minutes);
         else
-            return message + String.format(seconds == 1 ? SECONDS : SECONDS, seconds);
+            return message + String.format(seconds == 1 ? SECOND : SECONDS, seconds);
     }
 
     public LocalDateTime getTimestamp() {
