@@ -15,15 +15,12 @@ public class Message {
         this.user = user;
         this.timestamp = clock.now();
         this.clock = clock;
-        this.messagePresenter = new MessagePresenter(message);
+        this.messagePresenter = new MessagePresenter(user.getUsername(), message);
     }
 
     @Override
     public String toString() {
-        LocalDateTime now = clock.now();
-        long minutes = timestamp.until(now, ChronoUnit.MINUTES);
-        long seconds = timestamp.until(now, ChronoUnit.SECONDS);
-        return messagePresenter.showMessage(minutes, seconds);
+        return messagePresenter.showMessage(clock.now(), timestamp);
     }
 
     public LocalDateTime getTimestamp() {
@@ -31,6 +28,6 @@ public class Message {
     }
 
     public String toWallString() {
-        return user.getUsername() + " - " + toString();
+        return messagePresenter.showWallMessage(clock.now(), timestamp);
     }
 }

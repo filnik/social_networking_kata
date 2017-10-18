@@ -26,6 +26,7 @@ public class MessageTest {
     @Before
     public void setUp() throws Exception {
         when(clock.now()).thenReturn(LocalDateTime.of(2017, 01, 20, 15, 04, 30));
+        when(user.getUsername()).thenReturn("Sara");
         message = new Message(user, MESSAGE_STRING, clock);
     }
 
@@ -56,7 +57,6 @@ public class MessageTest {
     @Test
     public void wallString() throws Exception {
         when(clock.now()).thenReturn(LocalDateTime.of(2017, 01, 20, 15, 04, 31));
-        when(user.getUsername()).thenReturn("Sara");
         assertEquals("Sara - Filippo -> ciao (1 second ago)", message.toWallString());
     }
 }
